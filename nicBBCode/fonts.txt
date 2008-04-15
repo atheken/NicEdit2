@@ -1,0 +1,35 @@
+	var html = xhtml;
+		while(1) {
+			var stylesRe = /<span.*?style="(.*?)">(.*?)<\/span>/gi;
+			var styles = stylesRe.exec(xhtml);
+			if(!styles) {
+				break;
+			}
+			var css = styles[1].split(";");
+			var tags = new Array();
+			var end = new Array();
+			for(var i=0;i<css.length;i++) {
+				if(css[i]) {
+					var cssItem = css[i];
+					if(cssItem.indexOf('text-decoration:underline') != -1) {
+						tags.push('u'); end.push('u');
+					} else if(cssItem.indexOf('font-size:') != -1) {
+						var size = cssItem.replace('font-size:','');
+						tags.push('size='+size2bb[size]);
+						end.push('size');
+					}
+					
+				}
+			}
+			var txt = '';
+			for(var i=0;i<tags.length;i++) {
+				txt += '['+tags[i]+']';
+			}
+			alert(styles[2]);
+			txt += styles[2];
+			for(var i=tags.length-1;i>=0;i--) {
+				txt += '[/'+end[i]+']';
+			}
+			html = html.replace(styles[0],txt);
+		}
+		xhtml = html;
