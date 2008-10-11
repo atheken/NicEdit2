@@ -27,7 +27,7 @@ var nicEditors = {
 		var editors = nicEditors.editors;
 		for(var i=0;i<editors.length;i++) {
 			if(editors[i].instanceById(e)) {
-				return editors[i];
+				return editors[i].instanceById(e);
 			}
 		}
 	}
