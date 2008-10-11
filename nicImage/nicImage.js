@@ -22,7 +22,7 @@ var nicImageButton = nicEditorAdvancedButton.extend({
 			'' : {type : 'title', txt : 'Add/Edit Image'},
 			'src' : {type : 'text', txt : 'URL', 'value' : 'http://', style : {width: '150px'}},
 			'alt' : {type : 'text', txt : 'Alt Text', style : {width: '100px'}},
-			'align' : {type : 'select', txt : 'Align', options : {'left' : 'Left', 'right' : 'Right'}}
+			'align' : {type : 'select', txt : 'Align', options : {none : 'Default','left' : 'Left', 'right' : 'Right'}}
 		},this.im);
 	},
 	

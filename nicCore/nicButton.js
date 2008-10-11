@@ -135,8 +135,9 @@ var nicEditorButton = bkClass.extend({
 	},
 	
 	key : function(nicInstance,e) {
-		if(this.options.key && e.ctrlKey && String.fromCharCode(e.keyCode).toLowerCase() == this.options.key) {
+		if(this.options.key && e.ctrlKey && String.fromCharCode(e.keyCode || e.charCode).toLowerCase() == this.options.key) {
 			this.mouseClick();
+			if(e.preventDefault) e.preventDefault();
 		}
 	}
 	

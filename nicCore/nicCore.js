@@ -72,7 +72,7 @@ var nicEditor = bkClass.extend({
 
 	addInstance : function(e,o) {
 		e = this.checkReplace($BK(e));
-		if(e.contentEditable || !!window.opera) {
+		if( (e.contentEditable || !!window.opera) && navigator.userAgent.indexOf('Firefox/3') == -1 ) {
 			var newInstance = new nicEditorInstance(e,o,this);
 		} else {
 			var newInstance = new nicEditorIFrameInstance(e,o,this);

@@ -186,7 +186,7 @@ var bkLib = {
 		if (document.addEventListener) {
 			document.addEventListener("DOMContentLoaded", bkLib.domLoaded, null);
 		} else if(bkLib.isMSIE) {
-			document.write("<scr"+"ipt id=__ie_onload defer " + ((location.protocol == "https:") ? "src='javascript:void(0)'" : "src=//0") + "><\/scr"+"ipt>");
+			document.write("<style>.nicEdit-main p { margin: 0; }</style><scr"+"ipt id=__ie_onload defer " + ((location.protocol == "https:") ? "src='javascript:void(0)'" : "src=//0") + "><\/scr"+"ipt>");
 			$BK("__ie_onload").onreadystatechange = function() {
 			    if (this.readyState == "complete"){bkLib.domLoaded();}
 			};

@@ -41,7 +41,6 @@ var nicEditorInstance = bkClass.extend({
 			
 			var ie7s = (bkLib.isMSIE && !((typeof document.body.style.maxHeight != "undefined") && document.compatMode == "CSS1Compat"))
 			editorElm.setStyle((ie7s) ? {height : newY+'px'} : {overflow: 'hidden'});
-	
 			this.elm = editorElm;	
 		
 		}
@@ -128,19 +127,8 @@ var nicEditorInstance = bkClass.extend({
 	},
 	
 	keyDown : function(e,t) {
-		if(e.keyCode == 13) {
-			if(bkLib.isMSIE) {
-				var rng = this.getRng();
-				rng.pasteHTML('<br />');
-				rng.collapse(false);
-				rng.select();
-				return false;
-			}
-		}
 		if(e.ctrlKey) {
 			this.ne.fireEvent('key',this,e);
-			if(e.preventDefault) e.preventDefault();
-			return false;
 		}
 	},
 	
