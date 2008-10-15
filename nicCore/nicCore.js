@@ -78,7 +78,6 @@ var nicEditor = bkClass.extend({
 			var newInstance = new nicEditorIFrameInstance(e,o,this);
 		}
 		this.nicInstances.push(newInstance);
-		this.fireEvent('add',newInstance);
 		return this;
 	},
 	

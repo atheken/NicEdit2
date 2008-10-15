@@ -1,7 +1,4 @@
 var nicEditorButton = bkClass.extend({
-	isDisabled : false,
-	isHover : false,
-	isActive : false,
 	
 	construct : function(e,buttonName,options,nicEditor) {
 		this.options = options.buttons[buttonName];
@@ -16,8 +13,7 @@ var nicEditorButton = bkClass.extend({
 		this.button.addEvent('mouseover', this.hoverOn.closure(this)).addEvent('mouseout',this.hoverOff.closure(this)).addEvent('mousedown',this.mouseClick.closure(this)).noSelect();
 		
 		if(!window.opera) {
-			this.button.onmousedown = bkLib.cancelEvent;
-			this.button.onclick = bkLib.cancelEvent;
+			this.button.onmousedown = this.button.onclick = bkLib.cancelEvent;
 		}
 		
 		nicEditor.addEvent('selected', this.enable.closure(this)).addEvent('blur', this.disable.closure(this)).addEvent('key',this.key.closure(this));

@@ -25,18 +25,13 @@ var nicEditorInstance = bkClass.extend({
 			var editorElm = new bkElement('DIV').setStyle({width : (newX-8)+'px', margin: '4px', minHeight : newY+'px'}).addClass('main').appendTo(this.editorContain);
 
 			e.setStyle({display : 'none'});
-						
+				
+			editorElm.innerHTML = e.innerHTML;		
 			if(isTextarea) {
 				editorElm.setContent(e.value);
 				this.copyElm = e;
-				
-				while(e = e.parentNode) {
-					if(e.nodeName == "FORM") {
-						bkLib.addEvent(e,'submit',this.saveContent.closure(this));
-					}
-				}	
-			} else {
-				editorElm.innerHTML = e.innerHTML;
+				var f = e.parentTag('FORM');
+				if(f) { bkLib.addEvent( f, 'submit', this.saveContent.closure(this)); }
 			}
 			
 			var ie7s = (bkLib.isMSIE && !((typeof document.body.style.maxHeight != "undefined") && document.compatMode == "CSS1Compat"))
@@ -49,7 +44,7 @@ var nicEditorInstance = bkClass.extend({
 		this.init();
 		this.blur();
 
-       	try { this.nicCommand('styleWithCSS',true); } catch (ex) {}
+		try { this.nicCommand('styleWithCSS',true); } catch (e) {}
 	},
 	
 	init : function() {
@@ -59,6 +54,7 @@ var nicEditorInstance = bkClass.extend({
 		}
 		this.instanceDoc = document.defaultView;
 		this.elm.addEvent('mousedown',this.selected.closureListener(this)).addEvent('keypress',this.keyDown.closureListener(this)).addEvent('focus',this.selected.closure(this)).addEvent('blur',this.blur.closure(this)).addEvent('keyup',this.selected.closure(this));
+		this.ne.fireEvent('add',this);
 	},
 	
 	remove : function() {
@@ -69,7 +65,7 @@ var nicEditorInstance = bkClass.extend({
 			this.ne.removePanel();
 		}
 		this.disable();
-		this.ne.fireEvent('removeInstance',this);
+		this.ne.fireEvent('remove',this);
 	},
 	
 	disable : function() {
