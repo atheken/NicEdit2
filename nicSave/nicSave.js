@@ -1,7 +1,7 @@
 /**
  * nicSave
  * @description: A button for nicEdit ajax content saving
- * @requires: nicCore, nicButton
+ * @requires: nicCore
  * @author: Brian Kirchoff
  * @version: 0.9.0
  */
