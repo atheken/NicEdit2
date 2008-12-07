@@ -42,8 +42,6 @@ var nicEditorInstance = bkClass.extend({
 
 		this.init();
 		this.blur();
-
-		try { this.nicCommand('styleWithCSS',true); } catch (e) {}
 	},
 	
 	init : function() {
