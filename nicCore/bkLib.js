@@ -18,9 +18,9 @@ bkClass.extend = function(def) {
 };
 
 var bkElement = bkClass.extend({
-	construct : function(elm) {
+	construct : function(elm,d) {
 		if(typeof(elm) == "string") {
-			elm = document.createElement(elm);
+			elm = (d || document).createElement(elm);
 		}
 		elm = $BK(elm);
 		return elm;

@@ -21,12 +21,41 @@ var nicUploadButton = nicEditorAdvancedButton.extend({
 	addPane : function() {
 		this.im = this.ne.selectedInstance.selElm().parentTag('IMG');
 		this.myID = Math.round(Math.random()*Math.pow(10,15));
-		this.requestInterval = 4000;
+		this.requestInterval = 1000;
 
-		this.myFrame = new bkElement('iframe').setAttributes({ src : this.serverURI+'?id='+this.myID, width : '100%', height : '100px', frameBorder : 0, scrolling : 'no' }).setStyle({border : 0}).appendTo(this.pane.pane);
+		this.myFrame = new bkElement('iframe').setAttributes({ width : '100%', height : '100px', frameBorder : 0, scrolling : 'no' }).setStyle({border : 0}).appendTo(this.pane.pane);
 		this.progressWrapper = new bkElement('div').setStyle({display: 'none', width: '100%', height: '20px', border : '1px solid #ccc'}).appendTo(this.pane.pane);
 		this.progress = new bkElement('div').setStyle({width: '0%', height: '20px', backgroundColor : '#ccc'}).setContent('&nbsp').appendTo(this.progressWrapper);
-		setTimeout(this.makeRequest.closure(this), this.requestInterval);
+
+		setTimeout(this.addForm.closure(this),50);
+	},
+
+	addForm : function() {
+		var myDoc = this.myDoc = this.myFrame.contentWindow.document;
+		myDoc.open();
+		myDoc.write("<html><body>");
+		myDoc.write('<form method="post" action="'+this.serverURI+'?id='+this.myID+'" enctype="multipart/form-data">');
+		myDoc.write('<input type="hidden" name="APC_UPLOAD_PROGRESS" value="'+this.myID+'" />');
+		myDoc.write('<div style="position: absolute; margin-left: 160px;"><img src="http://imageshack.us/img/imageshack.png" width="30" style="float: left;" /><div style="float: left; margin-left: 5px; font-size: 10px;">Hosted by<br /><a href="http://www.imageshack.us/" target="_blank">ImageShack</a></div></div>');
+		myDoc.write('<div style="font-size: 14px; font-weight: bold; padding-top: 5px;">Insert a Image</div>');
+		myDoc.write('<input name="nicImage" type="file" style="margin-top: 10px;" />');
+		myDoc.write('</form>');
+		myDoc.write("</body></html>");
+		myDoc.close();
+
+		this.myBody = myDoc.body;
+
+		this.myForm = $BK(this.myBody.getElementsByTagName('form')[0]);
+		this.myInput = $BK(this.myBody.getElementsByTagName('input')[1]).addEvent('change', this.startUpload.closure(this));
+		this.myStatus = new bkElement('div',this.myDoc).setStyle({textAlign : 'center', fontSize : '14px'}).appendTo(this.myBody);
+  },
+
+	startUpload : function() {
+		this.myForm.setStyle({display : 'none'});
+		this.myStatus.setContent('<img src="http://files.nicedit.com/ajax-loader.gif" style="float: right; margin-right: 40px;" /><strong>Uploading...</strong><br />Please wait');
+		this.setProgress(10);
+		this.myForm.submit();
+		setTimeout(this.makeRequest.closure(this),this.requestInterval);
 	},
 
 	makeRequest : function() {
@@ -77,7 +106,9 @@ var nicUploadButton = nicEditorAdvancedButton.extend({
 			this.removePane();
 		} else {
 			this.setProgress( Math.round( (o.current/o.total) * 75) );
-			this.requestInterval = 1000;
+			if(o.interval) {
+				this.requestInterval = o.interval;
+			}
 		}
 	}
 
