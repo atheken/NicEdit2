@@ -9,7 +9,7 @@
 /* START CONFIG */
 var nicUploadOptions = {
 	buttons : {
-		'upload' : {name : 'Upload Image', type : 'nicUploadButton', tags : ['IMG']}
+		'upload' : {name : 'Upload Image', type : 'nicUploadButton'}
 	}
 	/* NICEDIT_REMOVE_START */,iconFiles : {'upload' : 'src/nicUpload/icons/upload.gif'}/* NICEDIT_REMOVE_END */
 };
@@ -56,6 +56,7 @@ var nicUploadButton = nicEditorAdvancedButton.extend({
 			this.requestInterval = false;
 
 			if(!this.im) {
+				this.ne.selectedInstance.restoreRng();
 				var tmp = 'javascript:nicImTemp();';
 				this.ne.nicCommand("insertImage",tmp);
 				this.im = this.findElm('IMG','src',tmp);
