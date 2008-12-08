@@ -37,7 +37,7 @@ var nicUploadButton = nicEditorAdvancedButton.extend({
 		myDoc.write('<form method="post" action="'+this.serverURI+'?id='+this.myID+'" enctype="multipart/form-data">');
 		myDoc.write('<input type="hidden" name="APC_UPLOAD_PROGRESS" value="'+this.myID+'" />');
 		myDoc.write('<div style="position: absolute; margin-left: 160px;"><img src="http://imageshack.us/img/imageshack.png" width="30" style="float: left;" /><div style="float: left; margin-left: 5px; font-size: 10px;">Hosted by<br /><a href="http://www.imageshack.us/" target="_blank">ImageShack</a></div></div>');
-		myDoc.write('<div style="font-size: 14px; font-weight: bold; padding-top: 5px;">Insert a Image</div>');
+		myDoc.write('<div style="font-size: 14px; font-weight: bold; padding-top: 5px;">Insert an Image</div>');
 		myDoc.write('<input name="nicImage" type="file" style="margin-top: 10px;" />');
 		myDoc.write('</form>');
 		myDoc.write("</body></html>");
