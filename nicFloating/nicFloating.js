@@ -1,6 +1,6 @@
 /**
  * NicEdit Floating Panel Support
- * @description: Create a new floating panel, that automatically positions itself above the last selected editor instance
+ * @description: Adds support to create a floating editor panel
  * @author: Brian Kirchoff
  * @version: 0.9.0
  * @requires: nicCore
